@@ -1,22 +1,5 @@
 import time
 
-def fib(n):
-    if n == 0:
-        return 0
-    elif n == 1:
-        return 1
-    return fib(n-2) + fib(n-1)
-
-'''
-           fib(3)                                fib(4)
-       fib(1)     fib(2)              fib(2)             fib(3)
-          1     fib(0) fib(1)    fib(0) fib(1)     fib(1)     fib(2)
-                  0      1         0       1         1      fib(0) fib(1)
-                                                              0     1
-'''
-
-
-
 def arg_wrapper( f ):
     def inner( *argv ):
         print '%s: %s' % (f.func_name,argv)
@@ -24,8 +7,15 @@ def arg_wrapper( f ):
         return res
     return inner
 
-c = arg_wrapper(fib)
-print c(5)
+@arg_wrapper
+def fib(n):
+    if n == 0:
+        return 0
+    elif n == 1:
+        return 1
+    return fib(n-2) + fib(n-1)
+
+print fib(5)
 
 
 
@@ -38,5 +28,12 @@ def time_wrapper( f ):
         return res
     return inner
 
-c = time_wrapper(fib)
+def fib2(n):
+    if n == 0:
+        return 0
+    elif n == 1:
+        return 1
+    return fib2(n-2) + fib2(n-1)
+
+c = time_wrapper(fib2)
 print c(5)
